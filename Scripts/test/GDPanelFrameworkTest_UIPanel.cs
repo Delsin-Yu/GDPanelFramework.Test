@@ -14,6 +14,15 @@ public class GDPanelFrameworkTest_UIPanel
     //     await GDTask.WaitUntil(() => System.Diagnostics.Debugger.IsAttached);
     // }
 
+    private ISceneRunner _sceneRunner;
+    
+    [BeforeTest]
+    public void BeforeTest()
+    {
+        _sceneRunner = ISceneRunner.Load("res://test_entry.tscn", true);
+        Assertions.AssertThat(_sceneRunner != null).IsTrue();
+    }
+
     [TestCase]
     public static async Task UIPanel_Test_EventFunction()
     {
@@ -102,5 +111,57 @@ public class GDPanelFrameworkTest_UIPanel
         Assertions.AssertThat(monitor.PanelCloseTokenCanceled).IsTrue();
         Assertions.AssertThat(monitor.PanelCloseTweenFinishTokenCanceled).IsTrue();
         Assertions.AssertThat(monitor.PanelOpenTweenFinishTokenCanceled).IsTrue();
+    }
+    
+    [TestCase]
+    public async Task UIPanel_Test_Input()
+    {
+        await GDTask.NextFrame();
+
+        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanel_InputTest.tscn");
+
+        var monitor = new UIPanel_InputTest.TestMonitor();
+
+        await resource
+            .CreatePanel<UIPanel_InputTest>(initializeCallback: panel =>
+            {
+                panel.Monitor = monitor;
+                panel.SceneRunner = _sceneRunner;
+            })
+            .OpenPanelAsync(closePolicy: ClosePolicy.Delete);
+
+        await GDTask.NextFrame();
+
+        Assertions.AssertThat(monitor.UIAcceptPressed).IsTrue();
+        Assertions.AssertThat(monitor.UIAcceptReleased).IsTrue();
+        Assertions.AssertThat(monitor.UICancelPressed).IsTrue();
+        Assertions.AssertThat(monitor.UICancelReleased).IsTrue();
+    }
+
+    [TestCase]
+    public async Task UIPanelArg_Test_Input()
+    {
+        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanelArg_InputTest.tscn");
+
+        var monitor = new UIPanelArg_InputTest.TestMonitor();
+
+        const int openArg = 10;
+
+        var closeValue = await resource
+            .CreatePanel<UIPanelArg_InputTest>(initializeCallback: panel =>
+            {
+                panel.Monitor = monitor;
+                panel.SceneRunner = _sceneRunner;
+            })
+            .OpenPanelAsync(openArg, closePolicy: ClosePolicy.Delete);
+
+        await GDTask.NextFrame();
+
+        Assertions.AssertThat(closeValue).IsEqual(closeValue);
+
+        Assertions.AssertThat(monitor.UIAcceptPressed).IsTrue();
+        Assertions.AssertThat(monitor.UIAcceptReleased).IsTrue();
+        Assertions.AssertThat(monitor.UICancelPressed).IsTrue();
+        Assertions.AssertThat(monitor.UICancelReleased).IsTrue();
     }
 }
