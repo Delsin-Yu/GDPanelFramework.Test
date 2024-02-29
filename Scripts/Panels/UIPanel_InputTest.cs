@@ -37,13 +37,13 @@ public partial class UIPanel_InputTest : UIPanel
         
         SceneRunner.SimulateKeyPressed(Key.Enter);
         
-        RegisterCancelInput(Call3, InputActionPhase.Pressed);
-        RegisterCancelInput(Call4, InputActionPhase.Released);
+        RegisterInputCancel(Call3, InputActionPhase.Pressed);
+        RegisterInputCancel(Call4, InputActionPhase.Released);
         
         SceneRunner.SimulateKeyPressed(Key.Escape);
                 
-        RegisterCancelInput(Call3, InputActionPhase.Pressed);
-        RegisterCancelInput(Call4, InputActionPhase.Released);
+        RegisterInputCancel(Call3, InputActionPhase.Pressed);
+        RegisterInputCancel(Call4, InputActionPhase.Released);
 
         SceneRunner.SimulateKeyPressed(Key.Escape);
         

@@ -90,28 +90,6 @@ public class GDPanelFrameworkTest_UIPanel
         Assertions.AssertThat(monitor.PanelCloseTweenFinishTokenCanceled).IsTrue();
         Assertions.AssertThat(monitor.PanelOpenTweenFinishTokenCanceled).IsTrue();
     }
-
-    [TestCase]
-    public static async Task UIPanelArg_Test_Token()
-    {
-        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanelArg_TokenTest.tscn");
-
-        var monitor = new UIPanelArg_TokenTest.TestMonitor();
-
-        const int openArg = 10;
-
-        var closeValue = await resource
-            .CreatePanel<UIPanelArg_TokenTest>(initializeCallback: panel => panel.Monitor = monitor)
-            .OpenPanelAsync(openArg, closePolicy: ClosePolicy.Delete);
-
-        await GDTask.NextFrame();
-
-        Assertions.AssertThat(closeValue).IsEqual(closeValue);
-        
-        Assertions.AssertThat(monitor.PanelCloseTokenCanceled).IsTrue();
-        Assertions.AssertThat(monitor.PanelCloseTweenFinishTokenCanceled).IsTrue();
-        Assertions.AssertThat(monitor.PanelOpenTweenFinishTokenCanceled).IsTrue();
-    }
     
     [TestCase]
     public async Task UIPanel_Test_Input()
@@ -137,31 +115,36 @@ public class GDPanelFrameworkTest_UIPanel
         Assertions.AssertThat(monitor.UICancelPressed).IsTrue();
         Assertions.AssertThat(monitor.UICancelReleased).IsTrue();
     }
-
+    
     [TestCase]
-    public async Task UIPanelArg_Test_Input()
+    public async Task UIPanel_Test_Input_Composite()
     {
-        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanelArg_InputTest.tscn");
+        await GDTask.NextFrame();
 
-        var monitor = new UIPanelArg_InputTest.TestMonitor();
+        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanel_CompositeInputTest.tscn");
 
-        const int openArg = 10;
+        var monitor = new UIPanel_CompositeInputTest.TestMonitor();
 
-        var closeValue = await resource
-            .CreatePanel<UIPanelArg_InputTest>(initializeCallback: panel =>
+        await resource
+            .CreatePanel<UIPanel_CompositeInputTest>(initializeCallback: panel =>
             {
                 panel.Monitor = monitor;
                 panel.SceneRunner = _sceneRunner;
             })
-            .OpenPanelAsync(openArg, closePolicy: ClosePolicy.Delete);
+            .OpenPanelAsync(closePolicy: ClosePolicy.Delete);
 
         await GDTask.NextFrame();
 
-        Assertions.AssertThat(closeValue).IsEqual(closeValue);
-
-        Assertions.AssertThat(monitor.UIAcceptPressed).IsTrue();
-        Assertions.AssertThat(monitor.UIAcceptReleased).IsTrue();
-        Assertions.AssertThat(monitor.UICancelPressed).IsTrue();
-        Assertions.AssertThat(monitor.UICancelReleased).IsTrue();
+        Assertions.AssertThat(monitor.Composite_Axis_Started).IsTrue();
+        Assertions.AssertThat(monitor.Composite_Axis_Negative_Updated).IsTrue();
+        Assertions.AssertThat(monitor.Composite_Axis_Positive_Updated).IsTrue();
+        Assertions.AssertThat(monitor.Composite_Axis_Ended).IsTrue();
+        
+        Assertions.AssertThat(monitor.Composite_Vector_Started).IsTrue();
+        Assertions.AssertThat(monitor.Composite_Vector_Up_Updated).IsTrue();
+        Assertions.AssertThat(monitor.Composite_Vector_Down_Updated).IsTrue();
+        Assertions.AssertThat(monitor.Composite_Vector_Left_Updated).IsTrue();
+        Assertions.AssertThat(monitor.Composite_Vector_Right_Updated).IsTrue();
+        Assertions.AssertThat(monitor.Composite_Vector_Ended).IsTrue();
     }
 }
