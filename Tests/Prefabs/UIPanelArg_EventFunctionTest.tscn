@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dukjrpjderms7"]
 
-[ext_resource type="Script" path="res://Scripts/Panels/UIPanelArg_EventFunctionTest.cs" id="1_gur3a"]
+[ext_resource type="Script" path="res://Tests/Scripts/Panels/UIPanelArg_EventFunctionTest.cs" id="1_gur3a"]
 
 [node name="UIPanelArg_EventFunctionTest" type="Control"]
 layout_mode = 3

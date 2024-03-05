@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://gc8kpc8d3wd0"]
 
-[ext_resource type="Script" path="res://Scripts/Panels/UIPanel_CompositeInputTest.cs" id="1_18dns"]
+[ext_resource type="Script" path="res://Tests/Scripts/Panels/UIPanel_CompositeInputTest.cs" id="1_18dns"]
 
 [node name="UIPanel_CompositeInputTest" type="Control"]
 layout_mode = 3

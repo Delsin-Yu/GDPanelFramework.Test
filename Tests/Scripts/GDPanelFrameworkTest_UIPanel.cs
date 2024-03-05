@@ -19,7 +19,7 @@ public class GDPanelFrameworkTest_UIPanel
     [BeforeTest]
     public void BeforeTest()
     {
-        _sceneRunner = ISceneRunner.Load("res://test_entry.tscn", true);
+        _sceneRunner = ISceneRunner.Load("res://Tests/test_entry.tscn", true);
         Assertions.AssertThat(_sceneRunner != null).IsTrue();
     }
 
@@ -28,7 +28,7 @@ public class GDPanelFrameworkTest_UIPanel
     {
         await GDTask.NextFrame();
 
-        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanel_EventFunctionTest.tscn");
+        var resource = GD.Load<PackedScene>("res://Tests/Prefabs/UIPanel_EventFunctionTest.tscn");
 
         var monitor = new UIPanel_EventFunctionTest.TestMonitor();
 
@@ -48,7 +48,7 @@ public class GDPanelFrameworkTest_UIPanel
     [TestCase]
     public static async Task UIPanelArg_Test_EventFunction()
     {
-        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanelArg_EventFunctionTest.tscn");
+        var resource = GD.Load<PackedScene>("res://Tests/Prefabs/UIPanelArg_EventFunctionTest.tscn");
 
         var monitor = new UIPanelArg_EventFunctionTest.TestMonitor();
 
@@ -76,7 +76,7 @@ public class GDPanelFrameworkTest_UIPanel
     {
         await GDTask.NextFrame();
 
-        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanel_TokenTest.tscn");
+        var resource = GD.Load<PackedScene>("res://Tests/Prefabs/UIPanel_TokenTest.tscn");
 
         var monitor = new UIPanel_TokenTest.TestMonitor();
 
@@ -96,7 +96,7 @@ public class GDPanelFrameworkTest_UIPanel
     {
         await GDTask.NextFrame();
 
-        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanel_InputTest.tscn");
+        var resource = GD.Load<PackedScene>("res://Tests/Prefabs/UIPanel_InputTest.tscn");
 
         var monitor = new UIPanel_InputTest.TestMonitor();
 
@@ -121,7 +121,7 @@ public class GDPanelFrameworkTest_UIPanel
     {
         await GDTask.NextFrame();
 
-        var resource = GD.Load<PackedScene>("res://Prefabs/UIPanel_CompositeInputTest.tscn");
+        var resource = GD.Load<PackedScene>("res://Tests/Prefabs/UIPanel_CompositeInputTest.tscn");
 
         var monitor = new UIPanel_CompositeInputTest.TestMonitor();
 

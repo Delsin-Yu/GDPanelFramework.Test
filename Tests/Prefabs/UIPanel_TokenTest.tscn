@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://uvoqbg6jvf04"]
 
-[ext_resource type="Script" path="res://Scripts/Panels/UIPanel_TokenTest.cs" id="1_vrtdn"]
+[ext_resource type="Script" path="res://Tests/Scripts/Panels/UIPanel_TokenTest.cs" id="1_vrtdn"]
 
 [node name="UIPanel_TokenTest" type="Control"]
 layout_mode = 3
