@@ -1,11 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using GDPanelFramework.Panels;
+﻿using GDPanelFramework.Panels;
 using GdUnit4;
 using Godot;
 using GodotPanelFramework;
 using GodotTask;
-using Environment = System.Environment;
 
 namespace GDPanelFramework.Tests;
 

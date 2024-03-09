@@ -29,24 +29,24 @@ public partial class UIPanel_InputTest : UIPanel
 
         RegisterInput(BuiltinInputNames.UIAccept, Call1, InputActionPhase.Pressed);
         RegisterInput(BuiltinInputNames.UIAccept, Call2, InputActionPhase.Released);
-        
+
         SceneRunner.SimulateKeyPressed(Key.Enter);
-        
+
         RemoveInput(BuiltinInputNames.UIAccept, Call1, InputActionPhase.Pressed);
         RemoveInput(BuiltinInputNames.UIAccept, Call2, InputActionPhase.Released);
-        
+
         SceneRunner.SimulateKeyPressed(Key.Enter);
-        
-        RegisterInputCancel(Call3, InputActionPhase.Pressed);
-        RegisterInputCancel(Call4, InputActionPhase.Released);
-        
-        SceneRunner.SimulateKeyPressed(Key.Escape);
-                
+
         RegisterInputCancel(Call3, InputActionPhase.Pressed);
         RegisterInputCancel(Call4, InputActionPhase.Released);
 
         SceneRunner.SimulateKeyPressed(Key.Escape);
-        
+
+        RegisterInputCancel(Call3, InputActionPhase.Pressed);
+        RegisterInputCancel(Call4, InputActionPhase.Released);
+
+        SceneRunner.SimulateKeyPressed(Key.Escape);
+
         GDTask.NextFrame().ContinueWith(ClosePanel);
     }
 }
