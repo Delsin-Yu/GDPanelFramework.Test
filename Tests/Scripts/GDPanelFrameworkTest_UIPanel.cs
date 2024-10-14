@@ -166,4 +166,18 @@ public class GDPanelFrameworkTest_UIPanel
         Assertions.AssertThat(panelA.Visible).IsTrue();
         panelA.CloseExtern();
     }
+
+    [TestCase]
+    public async Task UIPanel_Test_Delete_Buffer()
+    {
+        await GDTask.NextFrame();
+        var resource = GD.Load<PackedScene>("res://Tests/Prefabs/UIPanel_TweenHideTest.tscn");
+        var panel = resource.CreatePanel<UIPanel_TweenHideTest>(CreatePolicy.ForceCreate);
+        panel.OpenPanel(closePolicy: ClosePolicy.Cache);
+        panel.CloseExtern();
+        panel.QueueFree();
+        panel = resource.CreatePanel<UIPanel_TweenHideTest>();
+        panel.OpenPanel(closePolicy: ClosePolicy.Cache);
+        panel.CloseExtern();
+    }
 }
